@@ -1,17 +1,33 @@
-export default function AccordionChild(props){
+import { Children } from "react"
+
+export function AccordionChild(props){
     return(
         <>
         <div class="accordion-item border rounded-1">
-            <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                <div id="body-14-light">Berapa hari minimal sewa mobil lepas kunci?</div>
+            <h2 class="accordion-header" id={`flush-heading${props.id}`}>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${props.id}`} aria-expanded="false" aria-controls={`flush-collapse${props.id}`}>
+                <div id="body-14-light">{props.title}?</div>
                 </button>
             </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+            <div id={`flush-collapse${props.id}`} class="accordion-collapse collapse" aria-labelledby={`flush-heading${props.id}`} data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">{props.body}</div>
             </div>
         </div>
         <br/>
+        </>
+    )
+}
+
+export function AccordionParent({children}){
+    return(
+        <>
+        <div class="accordion accordion-flush" id="accordionFlushExample"> 
+            {Children.map(children, child => 
+                <div>
+                    {child}
+                </div>
+            )}
+        </div>
         </>
     )
 }

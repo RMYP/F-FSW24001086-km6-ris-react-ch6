@@ -9,13 +9,14 @@ import cardIcon3 from "../../assets/icon/icon_24hrs.svg"
 import cardIcon4 from "../../assets/icon/icon_professional.svg"
 import profileImg from "../../assets/img_photo.png"
 import { CarouselParent, CarouselChild } from "../../component/Carousel";
+import { AccordionParent, AccordionChild } from "../../component/Accordion";
 
 
 export default function HomePage(){
     return(
         <>
             <section id="heroes">
-                <HeroesComponent img={carImage} button={true}/>
+                <HeroesComponent img={carImage} button={true} btnText="Mulai Sewa Mobil" btnLink="/cars"/>
             </section>
             <section id="our-service">
                 <div class="container">
@@ -83,15 +84,44 @@ export default function HomePage(){
                     </div>
                     <div class="col-md-7">
                     {/* <!-- accordion --> */}
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        
-                    </div>
+                    <AccordionParent>
+                        <AccordionChild id="1" title="Apa saja syarat yang dibutuhkan" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br/>tempor incididunt ut labore et dolore magna aliqua"/>
+                        <AccordionChild id="2" title="Berapa hari minimal sewa mobil lepas kunci" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br/>tempor incididunt ut labore et dolore magna aliqua"/>
+                        <AccordionChild id="3" title="Berapa hari sebelumnya sabaiknya booking sewa mobil?" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br/>tempor incididunt ut labore et dolore magna aliqua"/>
+                        <AccordionChild id="4" title="Apakah Ada biaya antar-jemput?" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br/>tempor incididunt ut labore et dolore magna aliqua"/>
+                        <AccordionChild id="5" title="Bagaimana jika terjadi kecelakaan" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br/>tempor incididunt ut labore et dolore magna aliqua"/>
+                    </AccordionParent>
                     {/* <!-- end accordion --> */}
                     </div>
                 </div>
                 </div>
             </section>
             {/* <!-- end FAQ section --> */}
+            <footer>
+                <div class="container mb-3">
+                <div class="row justify-content-between">
+                    <div class="col-md-3">
+                    <p id="body-14-light">Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</p>
+                    <p id="body-14-light">binarcarrental@gmail.com</p>
+                    <p id="body-14-light">081-233-334-808</p>
+                    </div>
+                    <div class="col-md-2">
+                    <p id="body-14-regular">Our services</p>
+                    <p id="body-14-regular">Why Us</p>
+                    <p id="body-14-regular">Testimonial</p>
+                    <p id="body-14-regular">FAQ</p>
+                    </div>
+                    <div class="col-md-3">
+                    <p id="body-14-light">Connect with us</p>
+                    <img src="assets/icon/list item.svg" a  lt=""/>
+                    </div>
+                    <div class="col-md-2">
+                    <p id="body-14-light">Copyright Binar 2022</p>
+                    <img src="assets/icon/Rectangle 74.svg" alt=""/>
+                    </div>
+                </div>
+                </div>
+            </footer>
         </>
     )
 }
