@@ -1,3 +1,4 @@
+import ListBody14Light from "./List"
 export default function NavbarComponent() {
     return(
         <>
@@ -28,7 +29,7 @@ export default function NavbarComponent() {
                         <a href="#FAQ" id="body-14-regular">FAQ</a>
                     </li>
                     <li>
-                        <a className="btn btn-success" id="body-14-bold" href="">Register</a>
+                        <a className="btn btn-success" id="body-14-bold" href="/login">Register</a>
                     </li>
                     </ul>
                 </div>

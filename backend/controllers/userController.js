@@ -35,7 +35,7 @@ const login = async (req, res, next) => {
             res.status(200).json({
                 status: "Success",
                 message: "Success Login",
-                data: token
+                token
             })
         }
         next(new ApiError("Wrong Password", 401))
