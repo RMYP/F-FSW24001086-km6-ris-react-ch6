@@ -116,7 +116,7 @@ export default function FilterInput() {
                         <CardSearch key={car.id} car={car} />
                         ))
                     ) : (
-                        <p>No cars found with this filter.</p>
+                        <p>No cars found with this filter. *buat run pertama isi input tanggal & time untuk render card</p>
                     )
                     ) : carData.length > 0 ? (
                     carData.map((car) => (
