@@ -1,0 +1,899 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "F-FSW24001086-km6-ris-OAuth-ch5",
+    "description": "The swagger doc for example Auth ch 5",
+    "version": "1.0.0",
+    "license": {
+      "name": "ISC",
+      "url": "https://spdx.org/licenses/ISC.html"
+    },
+    "contact": {
+      "name": "Rizki Mauludin Yoga",
+      "url": "https://github.com/RMYP/F-FSW24001086-km6-ris-OAuth-ch5"
+    }
+  },
+  "tags": [
+    {
+      "name": "Auths",
+      "description": "AUTH API"
+    },
+    {
+      "name": "Car",
+      "description": "CAR DATA API"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:8000/api/v1",
+      "url-2": "http://localhost:3000/api/v1"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Auths"],
+        "summary": "Return value for Login",
+        "description": "API for login",
+        "requestBody": {
+          "description": "Use this API to login ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "MichaelJohnson@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "MichaelJohnson"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success login as Super Admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success Login"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJNaWNoYWVsIEpvaG5zb24iLCJyb2xlIjoiU3VwZXJBZG1pbiIsImVtYWlsIjoiTWljaGFlbEpvaG5zb25AZXhhbXBsZS5jb20iLCJzaG9wSWQiOjEsImlhdCI6MTcxNDA3NzI4MH0.5uFj5YUP7kdHZbqmaDGHnmgL1BFOLfpsuyPg7awabcM"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cant find register email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Email not register"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Wrong password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Wrong Password"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": ["Auths"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Use this API to register new account",
+        "description": "API for register",
+        "requestBody": {
+          "description": "Input Example",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Erika"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "erikatest1@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "erikajumshot"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "erikajumshot"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "Jalan kumis kotak"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "berlin"
+                  },
+                  "phone":{
+                    "type": "string",
+                    "example": "151-151-151"
+                  },
+                  "role":{
+                    "type": "string",
+                    "example": "Admin"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success register new account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {
+                        "status": "Success",
+                        "data": {
+                            "createNewUser": {
+                                "profileImage": "https://tse2.mm.bing.net/th?id=OIP.U2iQ7wNK6ZzTW_traW_-PQHaHa&pid=Api&P=0&h=180",
+                                "id": 17,
+                                "name": "Erika",
+                                "address": "jalan kumis kotak",
+                                "city": "berlin",
+                                "phone": "151-515-515",
+                                "libraryId": 1,
+                                "role": "Admin",
+                                "updatedAt": "2024-04-25T21:28:26.741Z",
+                                "createdAt": "2024-04-25T21:28:26.741Z"
+                            },
+                            "email": "erikatest@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Null field as an input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "ValidationError: \"*nama field yg kosong\" is required"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Make admin account without super admin role",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "Forbidden, you must have Super Admin role to make Admin account"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email no available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Email already teken"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/car/{id}": {
+      "get": {
+        "tags": ["Car"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Get car by id",
+        "description": "Use this API to GET car data by id ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2
+            },
+            "description": "Car ID"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success getting car data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    
+                    "Car": {
+                      "type": "object",
+                      "example": {
+                          "id": 2,
+                          "plate": "WXB-3984",
+                          "manufacture": "BMW",
+                          "model": "X5",
+                          "image": "car01.min.jpg",
+                          "rentPerDay": 800000,
+                          "carSize": "small",
+                          "capacity": 2,
+                          "description": null,
+                          "availableAt": "2022-03-23T15:49:05.563Z",
+                          "transmission": "Automatic",
+                          "year": 2019,
+                          "typeCars": "Convertible",
+                          "createdAt": "2024-04-24T11:51:20.230Z",
+                          "updatedAt": "2024-04-24T11:51:20.230Z"
+                        }
+                      }
+                    }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                  "message": {
+                          "type": "string",
+                          "example": "Token not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cant find car with requested id" ,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Cant find cars with id: 2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Car"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Edit car data",
+        "description": "Use this API to edit or update car data, *There is an error when update data using swagger, but if using Postman it work* ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2
+            },
+            "description": "Car ID"
+          }
+        ],
+        "requestBody": {
+          "description": "Request body, Noted: *There is an error when update data using swagger, but if using Postman it work*",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "model": {
+                    "type": "string",
+                    "example": "Panzerjager Ferdinand"
+                  },
+                  "manufacture": {
+                    "type": "string",
+                    "example": "porsche"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success update car data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {
+                        "id": 2,
+                        "plate": "OSL-4224",
+                        "manufacture": "Porche",
+                        "model": "Panzerjager Ferdinand",
+                        "image": "https://ik.imagekit.io/zcrvfsvrw/file_05ed0232-e466-4f4a-bf50-2da8f047aeb2_xSuISmNlP.jpg",
+                        "rentPerDay": 2000,
+                        "carSize": "large",
+                        "capacity": 6,
+                        "description": null,
+                        "availableAt": "2022-03-23T15:49:05.563Z",
+                        "transmission": "Automatic",
+                        "year": 1934,
+                        "typeCars": "Sedan",
+                        "createdAt": "2024-04-25T07:39:37.787Z",
+                        "updatedAt": "2024-04-26T00:06:49.723Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "Token not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "You are not authorized. Required role Admin or Super Admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cant find Car with requested id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Car not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Car"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Delete car data",
+        "description": "Use this API to delete car ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2
+            },
+            "description": "Car ID"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success deleting Car data",
+            "content": {
+              "application/json":{
+                "schema":{
+                "type": "object",
+                "properties": {
+                  "status":{
+                    "type": "string",
+                    "example": "Success"
+                  },
+                  "message":{
+                    "type":"string",
+                    "example": "Car has been deleted"
+                  }
+                }
+              }
+              }
+            }
+            
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "Token not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "You are not authorized. Required role Admin or Super Admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cant find Car with requested id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Car not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }, 
+    "/car/": {
+      "get": {
+        "tags": ["Car"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Get all car data",
+        "description": "Use this API to get all car data in database",
+
+        "responses": {
+          "201": {
+            "description": "Success getting all car data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "book": {
+                      "type": "object",
+                      "example": {
+                        "id": 1,
+                        "plate": "DBH-3491",
+                        "manufacture": "Ford",
+                        "model": "F150",
+                        "image": "car01.min.jpg",
+                        "rentPerDay": 200000,
+                        "carSize": "small",
+                        "capacity": 2,
+                        "description": null,
+                        "availableAt": "2022-03-23T15:49:05.563Z",
+                        "transmission": "Automatic",
+                        "year": 2022,
+                        "typeCars": "Sedan",
+                        "createdAt": "2024-04-24T11:51:20.230Z",
+                        "updatedAt": "2024-04-24T11:51:20.230Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cant find any cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                  "message": {
+                          "type": "string",
+                          "example": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Car"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "summary": "Create new book data",
+        "description": "ini API utk register member",
+        "requestBody": {
+          "description": "Request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plate": {
+                    "type": "string",
+                    "example": "TGR-151"
+                  },
+                  "manufacture": {
+                    "type": "string",
+                    "example": "Henschel"
+                  },
+                  "rentPerDay": {
+                    "type": "integer",
+                    "example": 200000
+                  },
+                  "carSize": {
+                    "type": "string",
+                    "example": "large"
+                  },
+                  "capacity": {
+                    "type": "integer",
+                    "example": 5
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Kendaraan pak kumis kotak"
+                  },
+                  "availableAt": {
+                    "type": "string",
+                    "example": "1944-03-23T15:49:05.563Z"
+                  },
+                  "transmission": {
+                    "type": "string",
+                    "example": "Manual"
+                  },
+                  "year": {
+                    "type": "integer",
+                    "example": 1941
+                  },
+                  "typeCars": {
+                    "type": "string",
+                    "example": "Sedan"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success adding new book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "book": {
+                      "type": "object",
+                      "example": {
+                        "id": 1,
+                        "plate": "TGR-151",
+                        "manufacture": "Henschel",
+                        "model": "Tiger H1",
+                        "rentPerDay": 200000,
+                        "carSize": "large",
+                        "capacity": 5,
+                        "description": "Kendaraan pak kumis kotak",
+                        "availableAt": "1944-03-23T15:49:05.563Z",
+                        "transmission": "Manual",
+                        "year": 1941,
+                        "typeCars": "Sedan",
+                        "updatedAt": "2024-04-26T00:40:18.620Z",
+                        "createdAt": "2024-04-26T00:40:18.620Z",
+                        "image": "http://via.placeholder.com/600x400"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "There is a field with null value  ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                      "message": {
+                        "type": "string",
+                        "example": "Input cant be null"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "Token not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                      "message": {
+                      "type": "string",
+                      "example": "You are not authorized. Required role Admin or Super Admin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerToken": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

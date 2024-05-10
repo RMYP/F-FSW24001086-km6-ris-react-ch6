@@ -7,8 +7,8 @@ export function FetchCarData({children}){
   const [cars, setCars] = useState(null)
   const getCarData = async () => {
     try {
-      const response = await axios.get('https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json')
-      setCars(response.data)
+      const response = await axios.get('http://localhost:8000/api/v1/car/')
+      setCars(response.data.cars)
     } catch (error) {
         console.log(error)
     }
@@ -18,7 +18,6 @@ export function FetchCarData({children}){
     getCarData()
   }, [])
 
-  console.log(cars)
   return(
     <CarContext.Provider value={{ cars, setCars }}>
       {children}

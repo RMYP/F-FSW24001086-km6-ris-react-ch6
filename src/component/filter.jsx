@@ -2,8 +2,13 @@ import { carsContextData } from "../http";
 import { useState, useContext, useEffect } from "react";
 import { CardSearch } from "./Card";
 
+const getCarData = () => {
+    const carData = useContext(carsContextData);
+    return carData
+}
+
 export default function FilterInput() {
-  const carData = useContext(carsContextData);
+  const carData = getCarData()
 
   const [cars, setCars] = useState([]);
   const [filteredCar, setFilteredCar] = useState([]);
@@ -19,54 +24,43 @@ export default function FilterInput() {
     }
   }, [carData]);
   
+//   check if car available at the time
   const carsAvailabilityTime = (car) => {
     const date = new Date(car.availableAt).getTime();
     const pickUp = new Date(`${pickUpDate} ${pickUpTime}`).getTime()
     return date <= pickUp ? true : false
   }
 
+//   check if car have enough seat
   const filterPassenger = (car) => {
     return car.capacity >= passenger ? true : false
   }
 
   const filterCars = () => {
+
     const carArraydata = []
     if (cars.length > 0) {
         cars.filter((car) => {
-        if(filterPassenger(car) && carsAvailabilityTime(car) || !passenger && carsAvailabilityTime(car) || filterPassenger(car) && carsAvailabilityTime(car)){
-        carArraydata.push(car)
-      }}); 
+            console.log(carsAvailabilityTime(car))
+            if(car.available && filterPassenger(car) && carsAvailabilityTime(car) || 
+                car.available && !passenger && carsAvailabilityTime(car) || 
+                car.available && filterPassenger(car) && carsAvailabilityTime(car) ||
+                car.available && !pickUpDate && !pickUpTime && !passenger
+            )
+            {
+                carArraydata.push(car)
+            }
+        }); 
       setFilteredCar(carArraydata)
     } else {
       setFilteredCar([cars]);
     }
   };
 
-  // Handle input changes (all input change handlers)
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case "driver":
-        setDriver(value);
-        break;
-      case "pickUpDate":
-        setPickUpDate(value);
-        break;
-      case "pickUpTime":
-        setPickUpTime(value);
-        break;
-      case "passenger":
-        setPassenger(value);
-        break;
-      default:
-        break;
-    }
-    filterCars();
-  };
-
-  if(filteredCar.length < 1 && cars > 0) if(cars > 0) console.log("kecil")
-    console.log(filteredCar)
-
+  useEffect(() => {
+    filterCars
+  }, [])
+  
   return (
     <>
       <div className="container" id="input-form-filter-car">
@@ -104,6 +98,7 @@ export default function FilterInput() {
               id="load-btn"
               className="btn btn-success my-3"
               onClick={filterCars} 
+              onLoad={filterCars}
             >
               Cari Mobil
             </button>
@@ -111,33 +106,24 @@ export default function FilterInput() {
         </div>
       </div>
 
-
-
-
       {/* Render Card for Car */}
       <section>
             <div class="container">
                 <div class="row row-cols-1 row-cols-md-3 g-4" id="card-search">
-                    {filteredCar ? (
-                        filteredCar.length > 0 ? (
+                {filteredCar ? (
+                    filteredCar.length > 0 ? (
                         filteredCar.map((car) => (
-                            <CardSearch
-                            manufacture={car.manufacture}
-                            image={car.image}
-                            model={car.model}
-                            description={car.description}
-                            key={car.id}
-                            rent={car.rentPerDay}
-                            capacity={car.capacity}
-                            transmission={car.transmission}
-                            year={car.year}
-                            />
+                        <CardSearch key={car.id} car={car} />
                         ))
-                        ) : (
-                        <p>No cars found.</p>
-                        )
                     ) : (
-                        <p>Loading cars...</p> 
+                        <p>No cars found with this filter.</p>
+                    )
+                    ) : carData.length > 0 ? (
+                    carData.map((car) => (
+                        <CardSearch key={car.id} car={car} />
+                    ))
+                    ) : (
+                    <p>Loading cars...</p>
                     )}
                 </div>
             </div>

@@ -10,6 +10,7 @@ import cardIcon4 from "../../assets/icon/icon_professional.svg"
 import profileImg from "../../assets/img_photo.png"
 import { CarouselParent, CarouselChild } from "../../component/Carousel";
 import { AccordionParent, AccordionChild } from "../../component/Accordion";
+import ButtonBody14 from "../../component/button/button";
 
 
 export default function HomePage(){
@@ -70,8 +71,7 @@ export default function HomePage(){
                 <div class="container" id="register-section">
                 <h2 id="heading-36-bold">Sewa Mobil di (Lokasimu) Sekarang</h2>
                 <p id="body-14-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br/>tempor incididunt ut labore et dolore magna aliqua. </p>
-                <button type="button" class="btn btn-success btn-lg px-4 me-md-2" id="btn-success"><p id="body-14-bold">Mulai Sewa Mobil</p></button>
-                </div>
+                <ButtonBody14 btnLink="/cars" btnText="Mulai Sewa Sekarang" />                </div>
             </section>
             {/* <!-- end register section --> */}
             {/* <!-- FAQ section --> */}
