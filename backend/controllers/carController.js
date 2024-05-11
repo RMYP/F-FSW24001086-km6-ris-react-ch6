@@ -33,6 +33,7 @@ const getAllCar = async (req, res, next) => {
                 status: "Success",
                 cars: carData
             })
+            return;
         }
         return next(new ApiError("Not Found", 404))
     } catch (error) {
